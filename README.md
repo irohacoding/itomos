@@ -1,2 +1,5 @@
 # itomos
-A  glorious operating system
+An operating system
+
+### STATUS:
+もりもり勉強中 φ(●｀ε´●)

@@ -1,4 +1,7 @@
+;==========================================
 ; boot.asm
+; nasm boot.asm -f bin -o boot.bin
+[bits 16]
         mov ax, 0x07c0
         mov ds, ax
 
@@ -16,8 +19,9 @@ ch_loop:
 hang:
         jmp hang
 
-msg     db 'hello, itomos!', 13, 10, 0
+msg     db 'hello, this is itomos!', 13, 10, 0
 
         times 510-($-$$) db 0
         db 0x55
         db 0xAA
+;==========================================

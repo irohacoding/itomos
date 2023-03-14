@@ -1,11 +1,14 @@
-;==========================================
+;===============================================
 ; boot.asm
-; nasm boot.asm -f bin -o boot.bin
+;-----------------------------------------------
 [bits 16]
-	;; mov: data transfer instruction
-	;; ax: register
-	;; 0x07c0: memory location
+	; mov: data transfer instruction
+	; ax: general-purpose register (GPR)
+	; 0x07c0: memory location
 	mov ax, 0x07c0
+	; mov: data transfer instruction
+	; ds: 16-bit segment register
+	; ax: general-purpose register (GPR)
 	mov ds, ax
 
 	mov si, msg
@@ -28,4 +31,4 @@ msg	db 'hello, this is itomos!', 13, 10, 0
 	times 510-($-$$) db 0
 	db 0x55
 	db 0xAA
-;==========================================
+;===============================================

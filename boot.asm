@@ -1,7 +1,7 @@
 ;===============================================
 ; boot.asm
 ;-----------------------------------------------
-; [[bits 16]] use 16 bits
+; [[bits 16]] macro (use 16 bits mode)
 [bits 16]
 	; [mov] data transfer instruction
 	; [ax] accumulator (general-purpose register)
@@ -35,6 +35,7 @@ ch_loop:
 	mov ah, 0x0E
 	; [mov] data transfer instruction
 	; [bh] 8-bit register (8 low bits of bx) bx is base register
+	; [0] page 0
 	mov bh, 0
 	; [int] interrupt handler
 	; [0x10] 16 in decimal, print out the character
@@ -64,7 +65,8 @@ msg:
 	; [$] the assembly position at the begining
 	;     of the line containing the expression
 	; [$$] the begining of the current section
-	; [0] 0 for fills bootloader with zero padding
+	; [db] define byte (8 bits)
+	; [0] 0 for fills the output file with zeroes
 	times 510-($-$$) db 0
 	; [db] define byte (8 bits)
 	; [0x55] boot sector signature

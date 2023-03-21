@@ -22,11 +22,19 @@ disk_load:
 	ret
 
 disk_error:
+	mov bx, DISK_ERROR
+	call print
+	call print_nl
 	jmp disk_loop
 
 sectors_error:
-	jmp disk_loop
+	mov bx, SECTORS_ERROR
+	call print
 
 disk_loop:
 	jmp $
+
+;-----------------------------------------------
+DISK_ERROR: db "Disk read error", 0
+SECTORS_ERROR: db "Incorrect number of sectors read", 0
 ;===============================================

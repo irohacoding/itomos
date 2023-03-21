@@ -2,7 +2,8 @@
 ; gdt.asm
 ;-----------------------------------------------
 gdt_start:
-	dq 0x0
+	dd 0x0
+	dd 0x0
 
 gdt_code:
 	dw 0xffff
@@ -26,6 +27,7 @@ gdt_descriptor:
 	dw gdt_end - gdt_start - 1
 	dd gdt_start
 
+;-----------------------------------------------
 CODE_SEG equ gdt_code - gdt_start
 DATA_SEG equ gdt_data - gdt_start
 ;===============================================

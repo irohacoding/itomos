@@ -15,7 +15,7 @@ kernel.bin: boot/kernel-entry.o ${OBJ}
 	ld -m elf_i386 -o $@ -Ttext 0x1000 $^ --oformat binary
 
 run: itomos.bin
-	qemu-system-i386 -fda itomos.bin
+	qemu-system-i386 -fda itomos.bin -boot a
 
 %.o: %.c ${HEADERS}
 	gcc -m32 -fno-pie -ffreestanding -c $< -o $@

@@ -4,13 +4,20 @@
 ; Reference site:
 ; https://github.com/cfenollosa/os-tutorial
 ;-----------------------------------------------
+[bits 16]
 [org 0x7c00]
 
 	KERNEL_OFFSET equ 0x1000
 
-	mov [BOOT_DRIVE], dl
-	mov bp, 0x9000
+boot:
+	jmp main
+	times 3-($-$$) db 0x90
+
+main:
+	xor ax, ax
+	mov ds, ax
 	mov sp, bp
+	mov bp, 0x8000
 
 	mov bx, MSG_REAL_MODE
 	call print
@@ -33,9 +40,12 @@ load_kernel:
 	call print
 	call print_nl
 
+	mov dh, [NUM_SECTORS]
+
+	mov bx, 0
+	mov es, bx
+
 	mov bx, KERNEL_OFFSET
-	mov dh, 16
-	mov dl, [BOOT_DRIVE]
 	call disk_load
 	ret
 
@@ -47,7 +57,9 @@ BEGIN_32BIT:
 	call KERNEL_OFFSET
 	jmp $
 
-BOOT_DRIVE db 0
+;-----------------------------------------------
+NUM_SECTORS: db 0x01
+
 MSG_REAL_MODE db "Started in 16-bit REAL MODE", 0
 MSG_PROT_MODE db "Landed in 32-bit Protected Mode", 0
 MSG_LOAD_KERNEL db "Loading kernel into memory", 0

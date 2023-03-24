@@ -53,12 +53,12 @@ load_kernel:
 [bits 32]
 BEGIN_32BIT:
 	mov ebx, MSG_PROT_MODE
-	call print_string_32bit
+	call print_32bit
 	call KERNEL_OFFSET
 	jmp $
 
 ;-----------------------------------------------
-NUM_SECTORS: db 0x01
+NUM_SECTORS db 0x10
 
 MSG_REAL_MODE db "Started in 16-bit REAL MODE", 0
 MSG_PROT_MODE db "Landed in 32-bit Protected Mode", 0

@@ -27,5 +27,5 @@ run: itomos.bin
 	nasm $< -f bin -o $@
 
 clean:
-	rm -rf *.bin *.dis *.o itomos.bin *.elf
+	rm -rf *.bin *.o *.elf
 	rm -rf kernel/*.o boot/*.o boot/*.bin

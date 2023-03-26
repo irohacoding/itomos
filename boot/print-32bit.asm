@@ -4,7 +4,7 @@
 [bits 32]
 
 	VIDEO_MEMORY equ 0xb8000
-	WHITE_OB_BLACK equ 0x0f
+	WHITE_ON_BLACK equ 0x0f
 
 print_32bit:
 	pusha
@@ -12,7 +12,7 @@ print_32bit:
 
 print_32bit_loop:
 	mov al, [ebx]
-	mov ah, WHITE_OB_BLACK
+	mov ah, WHITE_ON_BLACK
 
 	cmp al, 0
 	je print_32bit_done

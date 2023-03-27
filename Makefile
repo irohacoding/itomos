@@ -2,8 +2,8 @@
 # $@ = target file
 # $< = first dependency
 # $^ = all dependency
-C_SOURCES = $(wildcard kernel/*.c)
-HEADERS = $(wildcard kernel/*.h)
+C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h)
 OBJ = ${C_SOURCES:.c=.o}
 
 all: run
@@ -28,4 +28,4 @@ run: itomos.bin
 
 clean:
 	rm -rf *.bin *.o *.elf
-	rm -rf kernel/*.o boot/*.o boot/*.bin
+	rm -rf kernel/*.o boot/*.o boot/*.bin drivers/*.o

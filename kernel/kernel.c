@@ -1,5 +1,7 @@
-/* kernel.c */
+#include "../drivers/screen.h"
+#include "util.h"
+
 void main() {
-  char* video_memory = (char*) 0xb8000;
-  *video_memory = 'K';
+  clear_screen();
+  kprint("hello, this is itomos!");
 }

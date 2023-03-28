@@ -1,18 +1,18 @@
 # itomos
 An operating system
 
-## STATUS:
+### STATUS:
 Studying with passion! φ(●｀ε´●)
 
-### 2023-03-10 hello, itomos!
+## 2023-03-28 hello, this is itomos!
 
-Write code (boot.asm) and run commands below.
+hello from kernel.
 
-`$ nasm boot.asm -f bin -o boot.bin`
+`$ make`
 
-`$ dd if=/dev/zero of=floppy.img bs=1024 count=1440`
+`$ dd if=/dev/zero of=floppy.img bs=512 count=2880`
 
-`$ dd if=boot.bin of=floppy.img seek=0 count=1 conv=notrunc`
+`$ dd if=itomos.bin of=floppy.img conv=notrunc`
 
 `$ mkdir iso`
 
@@ -20,12 +20,12 @@ Write code (boot.asm) and run commands below.
 
 `$ genisoimage -quiet -V 'itomos' -input-charset iso8859-1 -o itomos.iso -b floppy.img -hide floppy.img iso/`
 
-`$ brasero &`
+`$ brasero`
 
 Burn itomos.iso to DVD-RW media.
 
 Insert media into my old pc (HP compaq nx4820) and setup BIOS Boot Menu to '2. ATAPI CD-ROM Drive' and run!
 
-Yaaa!
+Yaaaa!
 
-![itomos](2023-03-10.jpg)
+![itomos](2023-03-28.jpg)

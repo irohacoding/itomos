@@ -16,8 +16,9 @@ boot:
 main:
 	xor ax, ax
 	mov ds, ax
+	mov [BOOT_DRIVE], dl
+	mov bp, 0x9000
 	mov sp, bp
-	mov bp, 0x8000
 
 	mov bx, MSG_REAL_MODE
 	call print
@@ -40,12 +41,12 @@ load_kernel:
 	call print
 	call print_nl
 
-	mov dh, [NUM_SECTORS]
-
 	mov bx, 0
 	mov es, bx
 
 	mov bx, KERNEL_OFFSET
+	mov dh, [NUM_SECTORS]
+	mov dl, [BOOT_DRIVE]
 	call disk_load
 	ret
 
@@ -58,7 +59,8 @@ BEGIN_32BIT:
 	jmp $
 
 ;-----------------------------------------------
-NUM_SECTORS db 0x10
+BOOT_DRIVE db 0
+NUM_SECTORS db 0x1F
 
 MSG_REAL_MODE db "Started in 16-bit REAL MODE", 0
 MSG_PROT_MODE db "Landed in 32-bit Protected Mode", 0

@@ -9,13 +9,29 @@
 
 void main() {
   clear_screen();
-  kprint("hello, this is itomos!\n");
 
+  kprint("Installing interrupt service routines.\n");
   isr_install();
 
-  kprint("enabling external interrupts.\n");
-  asm volatile("sti");
+  kprint("Enabling external interrupts.\n");
+  kprint("Initializing keyboard.\n");
+  irq_install();
 
-  kprint("initializing keyboard (IRQ 1).\n");
-  init_keyboard();
+  kprint("\nHello, this is itomos!\n");
+  kprint("Type BYE to exit.\n> ");
+}
+
+void user_input(char *input) {
+  if (strcmp(input, "HELLO") == 0) {
+    kprint("Hello!\n> ");
+  } else if (strcmp(input, "BYE") == 0) {
+    kprint("Thank you. Bye!\n");
+    asm volatile("hlt");
+  } else {
+    kprint("Hm, you said ");
+    kprint(input);
+    kprint("\n");
+    kprint("That's a nice word! keep going...");
+    kprint("\n> ");
+  }
 }

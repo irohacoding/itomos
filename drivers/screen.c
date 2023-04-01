@@ -32,8 +32,16 @@ void kprint(char *message) {
   kprint_at(message, -1, -1);
 }
 
+void kprint_backspace() {
+  int offset = get_cursor_offset() - 2;
+  uint8_t *vidmem = (uint8_t *) VIDEO_ADDRESS;
+  vidmem[offset] = ' ';
+  vidmem[offset + 1] = WHITE_ON_BLACK;
+  set_cursor_offset(offset);
+}
+
 int print_char(char c, int col, int row, char attr) {
-  unsigned char *vidmem = (unsigned char*) VIDEO_ADDRESS;
+  uint8_t *vidmem = (uint8_t*) VIDEO_ADDRESS;
   if (!attr) attr = WHITE_ON_BLACK;
 
   if (col >= MAX_COLS || row >= MAX_ROWS) {
@@ -59,8 +67,8 @@ int print_char(char c, int col, int row, char attr) {
     int i;
     for (i = 1; i < MAX_ROWS; i++)
       memory_copy(
-		  (char *)(get_offset(0, i) + VIDEO_ADDRESS),
-		  (char *)(get_offset(0, i-1) + VIDEO_ADDRESS),
+		  (uint8_t *)(get_offset(0, i) + VIDEO_ADDRESS),
+		  (uint8_t *)(get_offset(0, i-1) + VIDEO_ADDRESS),
 		  MAX_COLS * 2);
 
     char *last_line = (char *)(get_offset(0, MAX_ROWS-1) + VIDEO_ADDRESS);
@@ -91,8 +99,10 @@ void set_cursor_offset(int offset) {
 
 void clear_screen() {
   int screen_size = MAX_COLS * MAX_ROWS;
-  unsigned char *screen = (unsigned char*) VIDEO_ADDRESS;
-  for (int i = 0; i < screen_size; ++i) {
+  int i;
+  uint8_t *screen = (uint8_t*) VIDEO_ADDRESS;
+
+  for (i = 0; i < screen_size; ++i) {
     screen[i*2] = ' ';
     screen[i*2+1] = WHITE_ON_BLACK;
   }

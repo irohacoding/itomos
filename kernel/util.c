@@ -2,7 +2,7 @@
 #include "util.h"
 #include <stdint.h>
 
-void memory_copy(char *source, char *dest, int nbytes) {
+void memory_copy(uint8_t *source, uint8_t *dest, int nbytes) {
   int i;
   for (i = 0; i < nbytes; i++) {
     *(dest + i) = *(source + i);
@@ -41,4 +41,23 @@ void int_to_ascii(int n, char str[]) {
   str[i] = '\0';
 
   reverse(str);
+}
+
+void append(char s[], char n) {
+  int len = strlen(s);
+  s[len] = n;
+  s[len+1] = '\0';
+}
+
+void backspace(char s[]) {
+  int len = strlen(s);
+  s[len-1] = '\0';
+}
+
+int strcmp(char s1[], char s2[]) {
+  int i;
+  for (i = 0; s1[i] == s2[i]; i++) {
+    if (s1[i] == '\0') return 0;
+  }
+  return s1[i] - s2[i];
 }

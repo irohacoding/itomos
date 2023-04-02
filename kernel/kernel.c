@@ -14,8 +14,10 @@ void main() {
   isr_install();
 
   kprint("Enabling external interrupts.\n");
+  asm volatile("sti");
+
   kprint("Initializing keyboard.\n");
-  irq_install();
+  init_keyboard();
 
   kprint("\nHello, this is itomos!\n");
   kprint("Type BYE to exit.\n> ");
@@ -25,7 +27,7 @@ void user_input(char *input) {
   if (strcmp(input, "HELLO") == 0) {
     kprint("Hello!\n> ");
   } else if (strcmp(input, "BYE") == 0) {
-    kprint("Thank you. Bye!\n");
+    kprint("Bye!\n");
     asm volatile("hlt");
   } else {
     kprint("Hm, you said ");

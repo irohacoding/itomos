@@ -34,9 +34,9 @@ void kprint(char *message) {
 
 void kprint_backspace() {
   int offset = get_cursor_offset() - 2;
-  uint8_t *vidmem = (uint8_t *) VIDEO_ADDRESS;
+  uint8_t *vidmem = (uint8_t*) VIDEO_ADDRESS;
   vidmem[offset] = ' ';
-  vidmem[offset + 1] = WHITE_ON_BLACK;
+  vidmem[offset+1] = WHITE_ON_BLACK;
   set_cursor_offset(offset);
 }
 

@@ -1,6 +1,5 @@
 /* util.c */
 #include "util.h"
-#include <stdint.h>
 
 void memory_copy(uint8_t *source, uint8_t *dest, int nbytes) {
   int i;

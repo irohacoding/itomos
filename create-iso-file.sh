@@ -5,7 +5,7 @@ dd if=itomos.bin of=floppy.img conv=notrunc
 
 iso_dir=iso
 if [ ! -d $iso_dir ]; then
-    mkdir iso
+    mkdir "$iso_dir"
 fi
 
 cp floppy.img iso/
